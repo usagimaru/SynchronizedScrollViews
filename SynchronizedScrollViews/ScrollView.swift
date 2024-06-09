@@ -15,9 +15,6 @@ class ScrollView: NSScrollView {
 		case both
 	}
 	
-//	var scrollOffset: NSPoint {
-//		self.contentView.bounds.origin
-//	}
 	var documentOffset: NSPoint {
 		set { documentView?.scroll(newValue) }
 		get { documentVisibleRect.origin }
@@ -27,6 +24,7 @@ class ScrollView: NSScrollView {
 		get { documentView?.frame.size ?? .zero }
 	}
 	
+	/// Flips Y-axis
 	var customFlippingFlag: Bool = false { didSet {
 		(documentView as? LayeredView)?.customFlippingFlag = customFlippingFlag
 		(contentView as? ClipView)?.customFlippingFlag = customFlippingFlag
@@ -110,7 +108,7 @@ class ScrollView: NSScrollView {
 	
 	// MARK: -
 	
-	/// Set the scroll view the tracker
+	/// Set the tracker scroll view
 	func setTracker(_ scrollView: ScrollView?, direction: ScrollDirection) {
 		trackerScrollView = scrollView
 		synchronizationDirection = direction
@@ -124,6 +122,7 @@ class ScrollView: NSScrollView {
 
 class ClipView: NSClipView {
 	
+	/// Flips Y-axis
 	var customFlippingFlag: Bool = false
 	override var isFlipped: Bool {
 		customFlippingFlag
