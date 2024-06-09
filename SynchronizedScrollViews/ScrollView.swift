@@ -7,10 +7,6 @@
 
 import AppKit
 
-extension Notification.Name {
-	static let scrollViewDidScroll = Self("scrollViewDidScroll")
-}
-
 class ScrollView: NSScrollView {
 	
 	enum ScrollDirection {
