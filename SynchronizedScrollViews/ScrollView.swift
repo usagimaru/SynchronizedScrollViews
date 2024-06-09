@@ -99,8 +99,7 @@ class ScrollView: NSScrollView {
 				
 				// Using `NSScrollView.scroll(_ clipView: NSClipView, to point: NSPoint)` works perfectly.
 				// https://developer.apple.com/documentation/appkit/nsview/1531337-scroll
-				trackerScrollView.scroll(trackerScrollView.contentView, to: newOffset)
-				trackerScrollView.reflectScrolledClipView()
+				trackerScrollView.scroll(to: newOffset)
 			}
 		}
 	}
@@ -112,6 +111,15 @@ class ScrollView: NSScrollView {
 	func setTracker(_ scrollView: ScrollView?, direction: ScrollDirection) {
 		trackerScrollView = scrollView
 		synchronizationDirection = direction
+	}
+	
+	/// Set scroll coordinates. This method can reflect coordinate changes due to bounce effect
+	func scroll(to point: NSPoint, reflectsClipView: Bool = true) {
+		scroll(contentView, to: point)
+		
+		if reflectsClipView {
+			reflectScrolledClipView()
+		}
 	}
 	
 	func reflectScrolledClipView() {
